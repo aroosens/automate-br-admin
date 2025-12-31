@@ -157,7 +157,7 @@ def main():
     with open(out_path, "w", encoding=args.encoding, newline="") as out:
         # Write with the same delimiter used for reading (if forced, use that)
         out_dialect = dialect
-        writer = csv.DictWriter(out, fieldnames=fieldnames, dialect=out_dialect)
+        writer = csv.DictWriter(out, fieldnames=["Story", "Sprintnr"], dialect=out_dialect)
         writer.writeheader()
         writer.writerows(unique_rows)
 
@@ -165,5 +165,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
