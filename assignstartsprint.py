@@ -107,7 +107,7 @@ def main():
         seen.add(key)
         unique_rows.append({  # keep only the two columns we want to output
             "Story": r.get(story_key, ""),
-            "Sprintnr": f"{BIGROOM}.{r.get(sprint_key, '')}
+            "Sprintnr": f"{BIGROOM}.{r.get(sprint_key, '')}"
         })
 
     total_in, total_out = len(rows), len(unique_rows)
@@ -167,6 +167,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
