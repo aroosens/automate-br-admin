@@ -115,10 +115,11 @@ def main():
         # Build a text preview
         # We'll render as a simple aligned table for the first N rows
         head = max(0, min(args.head, total_out))
+        cols = ["Story", "Sprintnr"]
         preview_rows = unique_rows[:head]
 
-        # Prepare columns to show: keep all original columns
-        cols = fieldnames
+        # Prepare columns to show: below command in case you want to keep all original columns
+        # cols = fieldnames
 
         # Compute column widths
         def cell(r, c):
@@ -164,4 +165,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
