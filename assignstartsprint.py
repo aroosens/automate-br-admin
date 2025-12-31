@@ -31,7 +31,7 @@ def parse_args():
         description="Sort CSV by Sprintnr (numeric) then Story, keeping one row per (Story,Sprintnr)."
     )
     p.add_argument("input", help="Path to input CSV")
-    p.add_argument("-o", "--output", help="Path to output CSV (required unless --dry-run)")
+    p.add_argument("-o", "--output", default="output.csv", help="Path to output CSV (required unless --dry-run)")
     p.add_argument("--encoding", default="utf-8-sig",
                    help="File encoding (default: utf-8-sig for Excel compatibility)")
     p.add_argument("--story-col", default="Story",
@@ -99,11 +99,14 @@ def main():
     seen = set()
     unique_rows = []
     for r in rows:
-        key = (norm_story(r.get(story_key)), to_float_or_inf(r.get(sprint_key)))
+        key = (norm_story(r.get(story_key)))
         if key in seen:
             continue
         seen.add(key)
-        unique_rows.append(r)
+        unique_rows.append({  # keep only the two columns we want to output
+            "Story": r.get(story_key, ""),
+            "Sprintnr": r.get(sprint_key, "")
+        })
 
     total_in, total_out = len(rows), len(unique_rows)
     removed = total_in - total_out
@@ -161,3 +164,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
